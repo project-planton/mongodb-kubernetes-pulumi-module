@@ -14,10 +14,10 @@ func Resources(ctx *pulumi.Context) (*pulumi.Context, error) {
 		return nil, errors.Wrap(err, "failed to add namespace")
 	}
 
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
-	addNamespaceToContext(&ctxConfig, namespace)
-	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxConfig)
+	addNamespaceToContext(&ctxState, namespace)
+	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxState)
 	return ctx, nil
 }
 

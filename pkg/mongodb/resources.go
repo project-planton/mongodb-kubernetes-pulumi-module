@@ -21,11 +21,11 @@ type ResourceStack struct {
 
 func (resourceStack *ResourceStack) Resources(ctx *pulumi.Context) error {
 	// https://artifacthub.io/packages/helm/bitnami/mongodb
-	var ctxConfig, err = loadConfig(ctx, resourceStack)
+	var ctxState, err = loadConfig(ctx, resourceStack)
 	if err != nil {
 		return errors.Wrap(err, "failed to initiate context config")
 	}
-	ctx = ctx.WithValue(mongodbcontextstate.Key, *ctxConfig)
+	ctx = ctx.WithValue(mongodbcontextstate.Key, *ctxState)
 
 	// Create the namespace resource
 	ctx, err = mongodbnamespaceresources.Resources(ctx)

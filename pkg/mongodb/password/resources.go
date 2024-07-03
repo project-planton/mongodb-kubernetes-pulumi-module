@@ -23,10 +23,10 @@ func Resources(ctx *pulumi.Context) (*pulumi.Context, error) {
 		return nil, fmt.Errorf("failed to get random password value: %w", err)
 	}
 
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
-	addRandomPasswordToContext(&ctxConfig, randomPassword)
-	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxConfig)
+	addRandomPasswordToContext(&ctxState, randomPassword)
+	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxState)
 	return ctx, nil
 }
 

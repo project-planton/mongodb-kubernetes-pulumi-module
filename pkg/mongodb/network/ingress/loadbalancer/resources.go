@@ -9,9 +9,9 @@ import (
 )
 
 func Resources(ctx *pulumi.Context) (newCtx *pulumi.Context, err error) {
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
-	if ctxConfig.Spec.EnvironmentInfo.KubernetesProvider == kubernetesprovider.KubernetesProvider_gcp_gke {
+	if ctxState.Spec.EnvironmentInfo.KubernetesProvider == kubernetesprovider.KubernetesProvider_gcp_gke {
 		ctx, err = gcp.Resources(ctx)
 		if err != nil {
 			return ctx, errors.Wrap(err, "failed to create load balancer resources for gke cluster")

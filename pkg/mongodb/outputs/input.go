@@ -26,29 +26,29 @@ type input struct {
 }
 
 func extractInput(ctx *pulumi.Context) *input {
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 	var externalLoadBalancerIpAddress = ""
 	var internalLoadBalancerIpAddress = ""
 
-	if ctxConfig.Status.AddedResources.LoadBalancerExternalService != nil {
-		externalLoadBalancerIpAddress = pulumicommonsloadbalancerservice.GetIpAddress(ctxConfig.Status.AddedResources.LoadBalancerExternalService)
+	if ctxState.Status.AddedResources.LoadBalancerExternalService != nil {
+		externalLoadBalancerIpAddress = pulumicommonsloadbalancerservice.GetIpAddress(ctxState.Status.AddedResources.LoadBalancerExternalService)
 	}
 
-	if ctxConfig.Status.AddedResources.LoadBalancerInternalService != nil {
-		internalLoadBalancerIpAddress = pulumicommonsloadbalancerservice.GetIpAddress(ctxConfig.Status.AddedResources.LoadBalancerExternalService)
+	if ctxState.Status.AddedResources.LoadBalancerInternalService != nil {
+		internalLoadBalancerIpAddress = pulumicommonsloadbalancerservice.GetIpAddress(ctxState.Status.AddedResources.LoadBalancerExternalService)
 	}
 
 	return &input{
-		resourceId:                    ctxConfig.Spec.ResourceId,
-		resourceName:                  ctxConfig.Spec.ResourceName,
-		environmentName:               ctxConfig.Spec.EnvironmentInfo.EnvironmentName,
-		endpointDomainName:            ctxConfig.Spec.EndpointDomainName,
-		namespaceName:                 ctxConfig.Spec.NamespaceName,
+		resourceId:                    ctxState.Spec.ResourceId,
+		resourceName:                  ctxState.Spec.ResourceName,
+		environmentName:               ctxState.Spec.EnvironmentInfo.EnvironmentName,
+		endpointDomainName:            ctxState.Spec.EndpointDomainName,
+		namespaceName:                 ctxState.Spec.NamespaceName,
 		externalLoadBalancerIpAddress: externalLoadBalancerIpAddress,
 		internalLoadBalancerIpAddress: internalLoadBalancerIpAddress,
-		internalHostname:              ctxConfig.Spec.InternalHostname,
-		externalHostname:              ctxConfig.Spec.ExternalHostname,
-		kubeServiceName:               ctxConfig.Spec.KubeServiceName,
-		kubeLocalEndpoint:             ctxConfig.Spec.KubeLocalEndpoint,
+		internalHostname:              ctxState.Spec.InternalHostname,
+		externalHostname:              ctxState.Spec.ExternalHostname,
+		kubeServiceName:               ctxState.Spec.KubeServiceName,
+		kubeLocalEndpoint:             ctxState.Spec.KubeLocalEndpoint,
 	}
 }

@@ -20,11 +20,11 @@ func Resources(ctx *pulumi.Context) (*pulumi.Context, error) {
 		return nil, errors.Wrap(err, "failed to add internal load balancer")
 	}
 
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
-	addLoadBalancerExternalServiceToContext(&ctxConfig, externalLoadBalancerService)
-	addLoadBalancerInternalServiceToContext(&ctxConfig, internalLoadBalancerService)
-	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxConfig)
+	addLoadBalancerExternalServiceToContext(&ctxState, externalLoadBalancerService)
+	addLoadBalancerInternalServiceToContext(&ctxState, internalLoadBalancerService)
+	ctx = ctx.WithValue(mongodbcontextstate.Key, ctxState)
 
 	return ctx, nil
 }

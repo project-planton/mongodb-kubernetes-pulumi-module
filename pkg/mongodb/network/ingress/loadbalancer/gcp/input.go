@@ -17,15 +17,15 @@ type input struct {
 }
 
 func extractInput(ctx *pulumi.Context) *input {
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
 	return &input{
-		resourceId:         ctxConfig.Spec.ResourceId,
-		resourceName:       ctxConfig.Spec.ResourceName,
-		namespace:          ctxConfig.Status.AddedResources.Namespace,
-		externalHostname:   ctxConfig.Spec.ExternalHostname,
-		internalHostname:   ctxConfig.Spec.InternalHostname,
-		endpointDomainName: ctxConfig.Spec.EndpointDomainName,
-		serviceName:        ctxConfig.Spec.KubeServiceName,
+		resourceId:         ctxState.Spec.ResourceId,
+		resourceName:       ctxState.Spec.ResourceName,
+		namespace:          ctxState.Status.AddedResources.Namespace,
+		externalHostname:   ctxState.Spec.ExternalHostname,
+		internalHostname:   ctxState.Spec.InternalHostname,
+		endpointDomainName: ctxState.Spec.EndpointDomainName,
+		serviceName:        ctxState.Spec.KubeServiceName,
 	}
 }

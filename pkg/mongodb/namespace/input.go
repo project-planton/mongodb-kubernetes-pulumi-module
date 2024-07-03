@@ -13,11 +13,11 @@ type input struct {
 }
 
 func extractInput(ctx *pulumi.Context) *input {
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
 	return &input{
-		namespaceName: ctxConfig.Spec.NamespaceName,
-		labels:        ctxConfig.Spec.Labels,
-		kubeProvider:  ctxConfig.Spec.KubeProvider,
+		namespaceName: ctxState.Spec.NamespaceName,
+		labels:        ctxState.Spec.Labels,
+		kubeProvider:  ctxState.Spec.KubeProvider,
 	}
 }

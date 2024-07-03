@@ -22,14 +22,14 @@ type input struct {
 }
 
 func extractInput(ctx *pulumi.Context) *input {
-	var ctxConfig = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
+	var ctxState = ctx.Value(mongodbcontextstate.Key).(mongodbcontextstate.ContextState)
 
 	return &input{
-		namespaceName:  ctxConfig.Spec.NamespaceName,
-		labels:         ctxConfig.Spec.Labels,
-		kubeProvider:   ctxConfig.Spec.KubeProvider,
-		resourceName:   ctxConfig.Spec.ResourceName,
-		namespace:      ctxConfig.Status.AddedResources.Namespace,
-		randomPassword: ctxConfig.Status.AddedResources.RandomPassword,
+		namespaceName:  ctxState.Spec.NamespaceName,
+		labels:         ctxState.Spec.Labels,
+		kubeProvider:   ctxState.Spec.KubeProvider,
+		resourceName:   ctxState.Spec.ResourceName,
+		namespace:      ctxState.Status.AddedResources.Namespace,
+		randomPassword: ctxState.Status.AddedResources.RandomPassword,
 	}
 }
