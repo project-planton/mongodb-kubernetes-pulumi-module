@@ -4,8 +4,7 @@ import (
 	"context"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/mongodb-kubernetes-pulumi-blueprint/pkg/mongodb/outputs"
-	"github.com/plantoncloud/pulumi-stack-runner-go-sdk/pkg/org"
-	"github.com/plantoncloud/pulumi-stack-runner-go-sdk/pkg/stack/output/backend"
+	"github.com/plantoncloud/stack-job-runner-golang-sdk/pkg/stack/output/backend"
 
 	"github.com/plantoncloud/planton-cloud-apis/zzgo/cloud/planton/apis/iac/v1/stackjob/enums/stackjoboperationtype"
 
@@ -14,11 +13,7 @@ import (
 )
 
 func Outputs(ctx context.Context, input *mongodbkubernetesstackmodel.MongodbKubernetesStackInput) (*mongodbkubernetesmodel.MongodbKubernetesStatusStackOutputs, error) {
-	pulumiOrgName, err := org.GetOrgName()
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to get pulumi org name")
-	}
-	stackOutput, err := backend.StackOutput(pulumiOrgName, input.StackJob)
+	stackOutput, err := backend.StackOutput(input.StackJob)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get stack output")
 	}
