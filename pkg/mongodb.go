@@ -10,7 +10,7 @@ import (
 )
 
 func mongodb(ctx *pulumi.Context, locals *Locals,
-	createdNamespace *kubernetescorev1.Namespace, labels map[string]string) error {
+	createdNamespace *kubernetescorev1.Namespace) error {
 
 	// https://github.com/bitnami/charts/blob/main/bitnami/mongodb/values.yaml
 	var helmValues = pulumi.Map{
@@ -24,30 +24,30 @@ func mongodb(ctx *pulumi.Context, locals *Locals,
 			"enabled": pulumi.Bool(locals.MongodbKubernetes.Spec.Container.IsPersistenceEnabled),
 			"size":    pulumi.String(locals.MongodbKubernetes.Spec.Container.DiskSize),
 		},
-		"podLabels":      pulumi.ToStringMap(labels),
-		"commonLabels":   pulumi.ToStringMap(labels),
+		"podLabels":      pulumi.ToStringMap(locals.KubernetesLabels),
+		"commonLabels":   pulumi.ToStringMap(locals.KubernetesLabels),
 		"useStatefulSet": pulumi.Bool(true),
 		"auth": pulumi.Map{
 			"existingSecret": pulumi.String(locals.KubeServiceName),
 		},
 	}
+
 	mergemaps.MergeMapToPulumiMap(helmValues, locals.MongodbKubernetes.Spec.HelmValues)
 
-	// Deploying a Mongodb Helm chart from the Helm repository.
+	// install helm-chart
 	_, err := helmv3.NewChart(ctx, locals.MongodbKubernetes.Metadata.Id, helmv3.ChartArgs{
-		Chart:     pulumi.String("mongodb"),
-		Version:   pulumi.String("15.1.4"), // Use the Helm chart version you want to install
+		Chart:     pulumi.String(vars.HelmChartName),
+		Version:   pulumi.String(vars.HelmChartVersion),
 		Namespace: pulumi.String(locals.Namespace),
 		Values:    helmValues,
-		//if you need to add the repository, you can specify `repo url`:
-		// The URL for the Helm chart repository
 		FetchArgs: helmv3.FetchArgs{
-			Repo: pulumi.String("https://charts.bitnami.com/bitnami"),
+			Repo: pulumi.String(vars.HelmChartRepoUrl),
 		},
-	}, pulumi.Timeouts(&pulumi.CustomTimeouts{Create: "2m", Update: "2m", Delete: "2m"}), pulumi.Parent(createdNamespace))
+	}, pulumi.Parent(createdNamespace),
+		pulumi.Timeouts(&pulumi.CustomTimeouts{Create: "2m", Update: "2m", Delete: "2m"}))
 
 	if err != nil {
-		return errors.Wrap(err, "failed to create mongodb resource")
+		return errors.Wrap(err, "failed to create mongodb helm-chart")
 	}
 	return nil
 }

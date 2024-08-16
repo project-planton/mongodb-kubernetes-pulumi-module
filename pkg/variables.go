@@ -1,17 +1,16 @@
 package pkg
 
 var vars = struct {
-	IstioIngressNamespace      string
-	IstioIngressSelectorLabels map[string]string
-	MongodbRootPasswordKey     string
-	RootUsername               string
-	MongoDbPort                int
+	MongodbRootPasswordKey string
+	RootUsername           string
+	MongoDbPort            int
+	HelmChartName          string
+	HelmChartRepoUrl       string
+	HelmChartVersion       string
 }{
-	IstioIngressNamespace: "istio-ingress",
-	IstioIngressSelectorLabels: map[string]string{
-		"app":   "istio-ingress",
-		"istio": "ingress",
-	},
+	HelmChartName:          "mongodb",
+	HelmChartRepoUrl:       "https://charts.bitnami.com/bitnami",
+	HelmChartVersion:       "15.1.4",
 	MongodbRootPasswordKey: "mongodb-root-password",
 	RootUsername:           "root",
 	MongoDbPort:            27017,
