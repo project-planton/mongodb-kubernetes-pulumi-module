@@ -47,7 +47,7 @@ func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetes.Mongodb
 	locals.KubeServiceName = mongodbKubernetes.Metadata.Name
 
 	locals.MongodbPodSelectorLabels = map[string]string{
-		"app.kubernetes.io/component": "master",
+		"app.kubernetes.io/component": "mongodb",
 		"app.kubernetes.io/instance":  mongodbKubernetes.Metadata.Id,
 		"app.kubernetes.io/name":      "mongodb",
 	}
