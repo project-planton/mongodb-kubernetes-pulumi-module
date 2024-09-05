@@ -43,6 +43,7 @@ func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetes.Mongodb
 	ctx.Export(outputs.Namespace, pulumi.String(locals.Namespace))
 	ctx.Export(outputs.RootUsername, pulumi.String(vars.RootUsername))
 	ctx.Export(outputs.RootPasswordSecretName, pulumi.String(mongodbKubernetes.Metadata.Name))
+	ctx.Export(outputs.RootPasswordSecretKey, pulumi.String(vars.MongodbRootPasswordKey))
 
 	locals.KubeServiceName = mongodbKubernetes.Metadata.Name
 
