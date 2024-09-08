@@ -2,8 +2,8 @@ package pkg
 
 import (
 	"github.com/pkg/errors"
+	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/datatypes/stringmaps/mergestringmaps"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/containerresources"
-	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/helm/mergemaps"
 	kubernetescorev1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/core/v1"
 	helmv3 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/helm/v3"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
@@ -32,7 +32,7 @@ func mongodb(ctx *pulumi.Context, locals *Locals,
 		},
 	}
 
-	mergemaps.MergeMapToPulumiMap(helmValues, locals.MongodbKubernetes.Spec.HelmValues)
+	mergestringmaps.MergeMapToPulumiMap(helmValues, locals.MongodbKubernetes.Spec.HelmValues)
 
 	// install helm-chart
 	_, err := helmv3.NewChart(ctx, locals.MongodbKubernetes.Metadata.Id, helmv3.ChartArgs{
