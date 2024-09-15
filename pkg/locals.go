@@ -25,9 +25,9 @@ type Locals struct {
 func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetes.MongodbKubernetesStackInput) *Locals {
 	locals := &Locals{}
 	//assign value for the locals variable to make it available across the project
-	locals.MongodbKubernetes = stackInput.ApiResource
+	locals.MongodbKubernetes = stackInput.Target
 
-	mongodbKubernetes := stackInput.ApiResource
+	mongodbKubernetes := stackInput.Target
 
 	locals.KubernetesLabels = map[string]string{
 		kuberneteslabelkeys.Resource:     strconv.FormatBool(true),
