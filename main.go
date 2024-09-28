@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/mongodb-kubernetes-pulumi-module/pkg"
-	"github.com/plantoncloud/planton/apis/zzgo/cloud/planton/apis/code2cloud/v1/kubernetes/mongodbkubernetes"
+	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/code2cloud/v1/kubernetes/mongodbkubernetes"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/stackinput"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
