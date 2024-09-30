@@ -1,10 +1,9 @@
 package pkg
 
 import (
+	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/provider/kubernetes/mongodbkubernetes/v1"
 	"fmt"
 	"github.com/plantoncloud/mongodb-kubernetes-pulumi-module/pkg/outputs"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/code2cloud/v1/kubernetes/mongodbkubernetes"
-	"github.com/plantoncloud/project-planton/apis/zzgo/cloud/planton/apis/commons/apiresource/enums/apiresourcekind"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/kuberneteslabelkeys"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"strconv"
@@ -17,12 +16,12 @@ type Locals struct {
 	KubeServiceFqdn          string
 	KubeServiceName          string
 	KubernetesLabels         map[string]string
-	MongodbKubernetes        *mongodbkubernetes.MongodbKubernetes
+	MongodbKubernetes        *mongodbkubernetesv1.MongodbKubernetes
 	Namespace                string
 	MongodbPodSelectorLabels map[string]string
 }
 
-func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetes.MongodbKubernetesStackInput) *Locals {
+func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetesv1.MongodbKubernetesStackInput) *Locals {
 	locals := &Locals{}
 	//assign value for the locals variable to make it available across the project
 	locals.MongodbKubernetes = stackInput.Target
@@ -33,7 +32,7 @@ func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetes.Mongodb
 		kuberneteslabelkeys.Resource:     strconv.FormatBool(true),
 		kuberneteslabelkeys.Organization: mongodbKubernetes.Spec.EnvironmentInfo.OrgId,
 		kuberneteslabelkeys.Environment:  mongodbKubernetes.Spec.EnvironmentInfo.EnvId,
-		kuberneteslabelkeys.ResourceKind: apiresourcekind.ApiResourceKind_mongodb_kubernetes.String(),
+		kuberneteslabelkeys.ResourceKind: "mongodb_kubernetes",
 		kuberneteslabelkeys.ResourceId:   mongodbKubernetes.Metadata.Id,
 	}
 
