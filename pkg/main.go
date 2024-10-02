@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/provider/kubernetes/mongodbkubernetes/v1"
+	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/provider/kubernetes/mongodbkubernetes/v1"
 	"encoding/base64"
 	"fmt"
 	"github.com/pkg/errors"

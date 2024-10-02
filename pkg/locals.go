@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/provider/kubernetes/mongodbkubernetes/v1"
+	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/provider/kubernetes/mongodbkubernetes/v1"
 	"fmt"
 	"github.com/plantoncloud/mongodb-kubernetes-pulumi-module/pkg/outputs"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/provider/kubernetes/kuberneteslabelkeys"

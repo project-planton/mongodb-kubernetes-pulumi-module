@@ -1,7 +1,7 @@
 package main
 
 import (
-	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/apis/provider/kubernetes/mongodbkubernetes/v1"
+	mongodbkubernetesv1 "buf.build/gen/go/plantoncloud/project-planton/protocolbuffers/go/project/planton/provider/kubernetes/mongodbkubernetes/v1"
 	"github.com/pkg/errors"
 	"github.com/plantoncloud/mongodb-kubernetes-pulumi-module/pkg"
 	"github.com/plantoncloud/pulumi-module-golang-commons/pkg/stackinput"
