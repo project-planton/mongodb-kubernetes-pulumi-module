@@ -30,8 +30,8 @@ func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetesv1.Mongo
 
 	locals.KubernetesLabels = map[string]string{
 		kuberneteslabelkeys.Resource:     strconv.FormatBool(true),
-		kuberneteslabelkeys.Organization: mongodbKubernetes.Spec.EnvironmentInfo.OrgId,
-		kuberneteslabelkeys.Environment:  mongodbKubernetes.Spec.EnvironmentInfo.EnvId,
+		kuberneteslabelkeys.Organization: mongodbKubernetes.Metadata.Org,
+		kuberneteslabelkeys.Environment:  mongodbKubernetes.Metadata.Env.Id,
 		kuberneteslabelkeys.ResourceKind: "mongodb_kubernetes",
 		kuberneteslabelkeys.ResourceId:   mongodbKubernetes.Metadata.Id,
 	}
