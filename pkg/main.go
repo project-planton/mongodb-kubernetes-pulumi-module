@@ -1,11 +1,11 @@
 package pkg
 
 import (
-	mongodbkubernetesv1 "buf.build/gen/go/project-planton/apis/protocolbuffers/go/project/planton/provider/kubernetes/mongodbkubernetes/v1"
 	"encoding/base64"
 	"fmt"
 	"github.com/pkg/errors"
-	"github.com/project-planton/pulumi-module-golang-commons/pkg/provider/kubernetes/pulumikubernetesprovider"
+	mongodbkubernetesv1 "github.com/project-planton/project-planton/apis/go/project/planton/provider/kubernetes/mongodbkubernetes/v1"
+	"github.com/project-planton/project-planton/pkg/pulmod/provider/kubernetes/pulumikubernetesprovider"
 	kubernetescorev1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/core/v1"
 	kubernetesmetav1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/meta/v1"
 	metav1 "github.com/pulumi/pulumi-kubernetes/sdk/v4/go/kubernetes/meta/v1"
