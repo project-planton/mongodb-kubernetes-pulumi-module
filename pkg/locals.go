@@ -68,15 +68,15 @@ func initializeLocals(ctx *pulumi.Context, stackInput *mongodbkubernetesv1.Mongo
 
 	if mongodbKubernetes.Spec.Ingress == nil ||
 		!mongodbKubernetes.Spec.Ingress.IsEnabled ||
-		mongodbKubernetes.Spec.Ingress.EndpointDomainName == "" {
+		mongodbKubernetes.Spec.Ingress.DnsDomain == "" {
 		return locals
 	}
 
 	locals.IngressExternalHostname = fmt.Sprintf("%s.%s", mongodbKubernetes.Metadata.Id,
-		mongodbKubernetes.Spec.Ingress.EndpointDomainName)
+		mongodbKubernetes.Spec.Ingress.DnsDomain)
 
 	locals.IngressInternalHostname = fmt.Sprintf("%s-internal.%s", mongodbKubernetes.Metadata.Id,
-		mongodbKubernetes.Spec.Ingress.EndpointDomainName)
+		mongodbKubernetes.Spec.Ingress.DnsDomain)
 
 	//export ingress hostnames
 	ctx.Export(outputs.IngressExternalHostname, pulumi.String(locals.IngressExternalHostname))
